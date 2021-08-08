@@ -63,7 +63,7 @@ class MainTabBarController: UITabBarController {
         vc.shouldRetry = true
         vc.maxRetryCount = 2
         vc.title = "Friends"
-        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ListViewController.addFriend))
+        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: vc, action: #selector(vc.addFriend))
         vc.fromFriendsScreen = true
         return vc
     }
@@ -82,6 +82,13 @@ class MainTabBarController: UITabBarController {
 	
 	private func makeCardsList() -> ListViewController {
 		let vc = ListViewController()
+        let adaptor = CardAPIServiceItemsAdaptor(api: .shared) { [weak vc ] card in
+            vc?.showCreditCardDetail(card: card)
+        }
+        vc.service = adaptor
+        vc.shouldRetry = false
+        vc.title = "Cards"
+        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: vc, action: #selector(vc.addCard))
 		vc.fromCardsScreen = true
 		return vc
 	}

@@ -22,21 +22,14 @@ class ListViewController: UITableViewController {
 	var fromSentTransfersScreen = false
 	var fromCardsScreen = false
 	var fromFriendsScreen = false
-    var service: FriendAPIServiceItemsAdaptor?
+    var service: ItemService?
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		refreshControl = UIRefreshControl()
 		refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
 		
-		if fromCardsScreen {
-			shouldRetry = false
-			
-			title = "Cards"
-			
-			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCard))
-			
-		} else if fromSentTransfersScreen {
+		if fromSentTransfersScreen {
 			shouldRetry = true
 			maxRetryCount = 1
 			longDateStyle = true
@@ -170,13 +163,13 @@ class ListViewController: UITableViewController {
         show(vc, sender: self)
     }
     
-    private func showCreditCardDetail(card: Card) {
+     func showCreditCardDetail(card: Card) {
         let vc = CardDetailsViewController()
         vc.card = card
         show(vc, sender: self)
     }
 	
-    private func showTransferVC(transfer: Transfer) {
+     func showTransferVC(transfer: Transfer) {
         let vc = TransferDetailsViewController()
         vc.transfer = transfer
         show(vc, sender: self)
@@ -210,5 +203,28 @@ extension UITableViewCell {
     func configure(_ viewModel: ItemViewModel) {
         textLabel?.text = viewModel.title
         detailTextLabel?.text = viewModel.subtitle
+    }
+}
+
+/***
+ To be instantiated at composition Root
+ */
+struct CardAPIServiceItemsAdaptor: ItemService {
+    let api: CardAPI
+    let select: (Card) -> Void
+    
+    func loadItems(completion: @escaping
+                    (Result<[ItemViewModel], Error>) -> Void) {
+        api.loadCards { result in
+            DispatchQueue.mainAsyncIfNeeded {
+                completion(result.map { items in
+                    items.map { item in
+                        ItemViewModel(card: item) {
+                            select(item)
+                        }
+                    }
+                })
+            }
+        }
     }
 }

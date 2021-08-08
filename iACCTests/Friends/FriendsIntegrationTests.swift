@@ -54,15 +54,15 @@ class FriendsIntegrationTests: XCTestCase {
 		XCTAssertTrue(friendsList.hasAddFriendButton, "add friend button not found")
 	}
 	
-//	func test_friendsList_addFriendButton_showsAddFriendViewOnTap() throws {
-//		let friendsList = try SceneBuilder().build().friendsList()
-//		
-//		XCTAssertFalse(friendsList.isPresentingAddFriendView, "precondition: shouldn't present add friend view before tapping button")
-//		
-//		friendsList.tapAddFriendButton()
-//		
-//		XCTAssertTrue(friendsList.isPresentingAddFriendView, "should present add friend view after tapping button")
-//	}
+	func test_friendsList_addFriendButton_showsAddFriendViewOnTap() throws {
+		let friendsList = try SceneBuilder().build().friendsList()
+		
+		XCTAssertFalse(friendsList.isPresentingAddFriendView, "precondition: shouldn't present add friend view before tapping button")
+		
+		friendsList.tapAddFriendButton()
+		
+		XCTAssertTrue(friendsList.isPresentingAddFriendView, "should present add friend view after tapping button")
+	}
 	
 	func test_friendsList_withNonPremiumUser_showsFriends_whenAPIRequestSucceeds() throws {
 		let friend0 = aFriend(name: "a name", phone: "a phone")
