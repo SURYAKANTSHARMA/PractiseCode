@@ -4,6 +4,11 @@
 
 import UIKit
 
+protocol ItemService {
+    func loadItems(completion: @escaping (Result<[ItemViewModel], Error>) -> Void)
+}
+
+
 class ListViewController: UITableViewController {
 	var items = [ItemViewModel]()
 	
@@ -17,22 +22,14 @@ class ListViewController: UITableViewController {
 	var fromSentTransfersScreen = false
 	var fromCardsScreen = false
 	var fromFriendsScreen = false
-	
+    var service: FriendAPIServiceItemsAdaptor?
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		refreshControl = UIRefreshControl()
 		refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
 		
-		if fromFriendsScreen {
-			shouldRetry = true
-			maxRetryCount = 2
-			
-			title = "Friends"
-			
-			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addFriend))
-			
-		} else if fromCardsScreen {
+		if fromCardsScreen {
 			shouldRetry = false
 			
 			title = "Cards"
@@ -68,23 +65,8 @@ class ListViewController: UITableViewController {
 	@objc private func refresh() {
 		refreshControl?.beginRefreshing()
 		if fromFriendsScreen {
-			FriendsAPI.shared.loadFriends { [weak self] result in
-				DispatchQueue.mainAsyncIfNeeded {
-
-                    self?.handleAPIResult(result.map { items in
-                                            
-                                            if User.shared?.isPremium == true {
-                                                (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache.save(items)
-                                            }
-
-                                            return items.map { item in
-                                                ItemViewModel(friend: item) {
-                                                    
-                        self?.showFriend(friend: item)
-                    } }})
-				}
-			}
-		} else if fromCardsScreen {
+            service?.loadItems(completion: handleAPIResult)
+        } else if fromCardsScreen {
 			CardAPI.shared.loadCards { [weak self] result in
 				DispatchQueue.mainAsyncIfNeeded {
                     self?.handleAPIResult(result.map { items in
@@ -182,7 +164,7 @@ class ListViewController: UITableViewController {
         item.onSelect()
     }
     
-    private func showFriend(friend: Friend) {
+    func showFriend(friend: Friend) {
         let vc = FriendDetailsViewController()
         vc.friend = friend
         show(vc, sender: self)
@@ -222,46 +204,6 @@ struct ItemViewModel {
     let subtitle: String
     let onSelect: ()->Void
 }
-
-extension ItemViewModel {
-    init(friend: Friend, onSelect:  @escaping() -> Void) {
-        title = friend.name
-        subtitle = friend.phone
-        self.onSelect = onSelect
-    }
-}
-
-extension ItemViewModel {
-    init(card: Card, onSelect: @escaping() -> Void) {
-        title = card.number
-        subtitle = card.holder
-        self.onSelect = onSelect
-    }
-}
-
-extension ItemViewModel {
-    init(transfer: Transfer, longDateStyle: Bool, onSelect: @escaping() -> Void) {
-        let numberFormatter = Formatters.number
-        numberFormatter.numberStyle = .currency
-        numberFormatter.currencyCode = transfer.currencyCode
-        
-        let amount = numberFormatter.string(from: transfer.amount as NSNumber)!
-        title = "\(amount) • \(transfer.description)"
-        
-        let dateFormatter = Formatters.date
-        if longDateStyle {
-            dateFormatter.dateStyle = .long
-            dateFormatter.timeStyle = .short
-            subtitle = "Sent to: \(transfer.recipient) on \(dateFormatter.string(from: transfer.date))"
-        } else {
-            dateFormatter.dateStyle = .short
-            dateFormatter.timeStyle = .short
-            subtitle = "Received from: \(transfer.sender) on \(dateFormatter.string(from: transfer.date))"
-        }
-        self.onSelect = onSelect
-    }
-}
-
 
 extension UITableViewCell {
     

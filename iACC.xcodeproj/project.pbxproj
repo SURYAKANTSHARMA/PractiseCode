@@ -43,6 +43,10 @@
 		08927BD4268618AC009195BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08927BCA268618AC009195BD /* User.swift */; };
 		08927BD5268618AC009195BD /* FriendsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08927BCB268618AC009195BD /* FriendsAPI.swift */; };
 		08927BD6268618AC009195BD /* NotImplementedViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08927BCC268618AC009195BD /* NotImplementedViewControllers.swift */; };
+		B77CA83026BEA216007C7775 /* ItemViewModel+Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77CA82F26BEA215007C7775 /* ItemViewModel+Friend.swift */; };
+		B77CA83226BEA22B007C7775 /* ItemViewModel+Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77CA83126BEA22B007C7775 /* ItemViewModel+Card.swift */; };
+		B77CA83426BEA23A007C7775 /* ItemViewModel+Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77CA83326BEA23A007C7775 /* ItemViewModel+Transfer.swift */; };
+		B77CA83626BEC9DE007C7775 /* FriendFriendAPIServiceItemsAdaptorAPIItemAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77CA83526BEC9DE007C7775 /* FriendFriendAPIServiceItemsAdaptorAPIItemAdaptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +100,10 @@
 		08927BCA268618AC009195BD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		08927BCB268618AC009195BD /* FriendsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsAPI.swift; sourceTree = "<group>"; };
 		08927BCC268618AC009195BD /* NotImplementedViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotImplementedViewControllers.swift; sourceTree = "<group>"; };
+		B77CA82F26BEA215007C7775 /* ItemViewModel+Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemViewModel+Friend.swift"; sourceTree = "<group>"; };
+		B77CA83126BEA22B007C7775 /* ItemViewModel+Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemViewModel+Card.swift"; sourceTree = "<group>"; };
+		B77CA83326BEA23A007C7775 /* ItemViewModel+Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemViewModel+Transfer.swift"; sourceTree = "<group>"; };
+		B77CA83526BEC9DE007C7775 /* FriendFriendAPIServiceItemsAdaptorAPIItemAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFriendAPIServiceItemsAdaptorAPIItemAdaptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +230,9 @@
 				08927B942686183A009195BD /* SceneDelegate.swift */,
 				08040FFB268B4C1D0062A93B /* MainTabBarController.swift */,
 				08927BC5268618AC009195BD /* ListViewController.swift */,
+				B77CA82F26BEA215007C7775 /* ItemViewModel+Friend.swift */,
+				B77CA83126BEA22B007C7775 /* ItemViewModel+Card.swift */,
+				B77CA83326BEA23A007C7775 /* ItemViewModel+Transfer.swift */,
 				08927BC3268618AC009195BD /* SegmentNavigationViewController.swift */,
 				08927BCC268618AC009195BD /* NotImplementedViewControllers.swift */,
 				080833DF268F609C00A8099A /* Helpers.swift */,
@@ -232,6 +243,7 @@
 				08927BC6268618AC009195BD /* CardAPI.swift */,
 				080833E1268F69C200A8099A /* ArticlesAPI.swift */,
 				08927BC22686185C009195BD /* Supporting Files */,
+				B77CA83526BEC9DE007C7775 /* FriendFriendAPIServiceItemsAdaptorAPIItemAdaptor.swift */,
 			);
 			path = iACC;
 			sourceTree = "<group>";
@@ -358,12 +370,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B77CA83226BEA22B007C7775 /* ItemViewModel+Card.swift in Sources */,
 				08927B932686183A009195BD /* AppDelegate.swift in Sources */,
+				B77CA83426BEA23A007C7775 /* ItemViewModel+Transfer.swift in Sources */,
 				08927BCF268618AC009195BD /* ListViewController.swift in Sources */,
 				08040FFC268B4C1D0062A93B /* MainTabBarController.swift in Sources */,
+				B77CA83026BEA216007C7775 /* ItemViewModel+Friend.swift in Sources */,
 				08927BD0268618AC009195BD /* CardAPI.swift in Sources */,
 				08927BD6268618AC009195BD /* NotImplementedViewControllers.swift in Sources */,
 				08927BD5268618AC009195BD /* FriendsAPI.swift in Sources */,
+				B77CA83626BEC9DE007C7775 /* FriendFriendAPIServiceItemsAdaptorAPIItemAdaptor.swift in Sources */,
 				08927BD1268618AC009195BD /* FriendsCache.swift in Sources */,
 				080833E0268F609C00A8099A /* Helpers.swift in Sources */,
 				08927BCD268618AC009195BD /* SegmentNavigationViewController.swift in Sources */,
