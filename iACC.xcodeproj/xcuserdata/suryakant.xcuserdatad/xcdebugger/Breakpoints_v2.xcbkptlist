@@ -14,73 +14,10 @@
             filePath = "iACC/ListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "showFriend(friend:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A07ED817-F89A-42B4-862B-33B6D3991352"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iACC/ListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "refresh()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A07ED817-F89A-42B4-862B-33B6D3991352 - 74260ccd2ec01cc7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Array&lt;iACC.Transfer&gt;) -&gt; Swift.Array&lt;iACC.ItemViewModel&gt; in closure #1 () -&gt; () in closure #3 (Swift.Result&lt;Swift.Array&lt;iACC.Transfer&gt;, Swift.Error&gt;) -&gt; () in iACC.ListViewController.refresh() -&gt; ()"
-                  moduleName = "iACC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/suryakant/Downloads/iACC%20Project_new/iACC/ListViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "286">
-               </Location>
-               <Location
-                  uuid = "A07ED817-F89A-42B4-862B-33B6D3991352 - e4c276f2b865f240"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (iACC.Transfer) -&gt; iACC.ItemViewModel in closure #1 (Swift.Array&lt;iACC.Transfer&gt;) -&gt; Swift.Array&lt;iACC.ItemViewModel&gt; in closure #1 () -&gt; () in closure #3 (Swift.Result&lt;Swift.Array&lt;iACC.Transfer&gt;, Swift.Error&gt;) -&gt; () in iACC.ListViewController.refresh() -&gt; ()"
-                  moduleName = "iACC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/suryakant/Downloads/iACC%20Project_new/iACC/ListViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "111">
-               </Location>
-               <Location
-                  uuid = "A07ED817-F89A-42B4-862B-33B6D3991352 - 67441ec29966fa37"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #2 (iACC.Transfer) -&gt; iACC.ItemViewModel in closure #1 (Swift.Array&lt;iACC.Transfer&gt;) -&gt; Swift.Array&lt;iACC.ItemViewModel&gt; in closure #1 () -&gt; () in closure #3 (Swift.Result&lt;Swift.Array&lt;iACC.Transfer&gt;, Swift.Error&gt;) -&gt; () in iACC.ListViewController.refresh() -&gt; ()"
-                  moduleName = "iACC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/suryakant/Downloads/iACC%20Project_new/iACC/ListViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100"
-                  offsetFromSymbolStart = "38">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -93,9 +30,25 @@
             filePath = "iACC/ListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EDFBE183-FF90-428A-B51F-C342D7925FE8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iACC/ListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

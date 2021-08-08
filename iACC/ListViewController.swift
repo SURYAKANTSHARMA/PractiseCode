@@ -28,24 +28,7 @@ class ListViewController: UITableViewController {
 		
 		refreshControl = UIRefreshControl()
 		refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
-		
-		if fromSentTransfersScreen {
-			shouldRetry = true
-			maxRetryCount = 1
-			longDateStyle = true
-
-			navigationItem.title = "Sent"
-			navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Send", style: .done, target: self, action: #selector(sendMoney))
-
-		} else if fromReceivedTransfersScreen {
-			shouldRetry = true
-			maxRetryCount = 1
-			longDateStyle = false
-			
-			navigationItem.title = "Received"
-			navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Request", style: .done, target: self, action: #selector(requestMoney))
-		}
-	}
+    }
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -57,36 +40,7 @@ class ListViewController: UITableViewController {
 	
 	@objc private func refresh() {
 		refreshControl?.beginRefreshing()
-		if fromFriendsScreen {
-            service?.loadItems(completion: handleAPIResult)
-        } else if fromCardsScreen {
-			CardAPI.shared.loadCards { [weak self] result in
-				DispatchQueue.mainAsyncIfNeeded {
-                    self?.handleAPIResult(result.map { items in
-                                            items.map { item in
-                                                ItemViewModel(card: item) {
-                        self?.showCreditCardDetail(card: item)
-                    } }})
-				}
-			}
-		} else if fromSentTransfersScreen || fromReceivedTransfersScreen {
-			TransfersAPI.shared.loadTransfers { [weak self] result in
-                guard let self = self else { return }
-				DispatchQueue.mainAsyncIfNeeded {
-                    self.handleAPIResult((result.map { items in
-                        items.filter {
-                            self.fromSentTransfersScreen  ? $0.isSender : !$0.isSender
-                        }
-                        .map { item in ItemViewModel(transfer: item, longDateStyle: self.fromSentTransfersScreen) {
-                            self.showTransferVC(transfer: item)
-                        }
-                       }
-                    }))
-				}
-			}
-		} else {
-			fatalError("unknown context")
-		}
+        service?.loadItems(completion: handleAPIResult)
 	}
 	
 	private func handleAPIResult(_ result: Result<[ItemViewModel], Error>) {
@@ -223,6 +177,30 @@ struct CardAPIServiceItemsAdaptor: ItemService {
                             select(item)
                         }
                     }
+                })
+            }
+        }
+    }
+}
+
+struct TransferAPIServiceItemsAdaptor: ItemService {
+    let api: TransfersAPI
+    let longDateStyle: Bool
+    let select: (Transfer) -> Void
+    let fromSentTransferScreen: Bool
+    
+    func loadItems(completion: @escaping
+                    (Result<[ItemViewModel], Error>) -> Void) {
+        api.loadTransfers { result in
+            DispatchQueue.mainAsyncIfNeeded {
+                completion(result.map { items in
+                    items.filter {
+                        fromSentTransferScreen  ? $0.isSender : !$0.isSender
+                    }
+                    .map { item in ItemViewModel(transfer: item, longDateStyle: longDateStyle) {
+                        select(item)
+                     }
+                   }
                 })
             }
         }
