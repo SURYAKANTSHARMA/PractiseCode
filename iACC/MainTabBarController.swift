@@ -5,9 +5,11 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
-	
-	convenience init() {
+    var friendCache: FriendsCache!
+    
+    convenience init(friendCache: FriendsCache) {
 		self.init(nibName: nil, bundle: nil)
+        self.friendCache = friendCache
 		self.setupViewController()
 	}
 
@@ -51,20 +53,20 @@ class MainTabBarController: UITabBarController {
 		return vc
 	}
 	
-	private func makeFriendsList() -> ListViewController {
-		let vc = ListViewController()
+    private func makeFriendsList() -> ListViewController {
+        let vc = ListViewController()
         let isPremium = User.shared?.isPremium == true
         vc.service = FriendAPIServiceItemsAdaptor(api: FriendsAPI.shared,
-                                                                        isPremium: User.shared?.isPremium ?? false,
-                                                                        select: { [weak vc] friend in vc?.showFriend(friend: friend)
-                                                                        }, cache: isPremium ? (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache : NullFriendsCache())
+                                                  isPremium: User.shared?.isPremium ?? false,
+                                                  select: { [weak vc] friend in vc?.showFriend(friend: friend)
+                                                  }, cache: isPremium ? friendCache : NullFriendsCache())
         vc.shouldRetry = true
         vc.maxRetryCount = 2
         vc.title = "Friends"
         vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ListViewController.addFriend))
-		vc.fromFriendsScreen = true
-		return vc
-	}
+        vc.fromFriendsScreen = true
+        return vc
+    }
 	
 	private func makeSentTransfersList() -> ListViewController {
 		let vc = ListViewController()
