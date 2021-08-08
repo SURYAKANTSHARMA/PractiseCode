@@ -231,6 +231,7 @@
 				08040FFB268B4C1D0062A93B /* MainTabBarController.swift */,
 				08927BC5268618AC009195BD /* ListViewController.swift */,
 				B77CA82F26BEA215007C7775 /* ItemViewModel+Friend.swift */,
+				B77CA83526BEC9DE007C7775 /* FriendFriendAPIServiceItemsAdaptorAPIItemAdaptor.swift */,
 				B77CA83126BEA22B007C7775 /* ItemViewModel+Card.swift */,
 				B77CA83326BEA23A007C7775 /* ItemViewModel+Transfer.swift */,
 				08927BC3268618AC009195BD /* SegmentNavigationViewController.swift */,
@@ -243,7 +244,6 @@
 				08927BC6268618AC009195BD /* CardAPI.swift */,
 				080833E1268F69C200A8099A /* ArticlesAPI.swift */,
 				08927BC22686185C009195BD /* Supporting Files */,
-				B77CA83526BEC9DE007C7775 /* FriendFriendAPIServiceItemsAdaptorAPIItemAdaptor.swift */,
 			);
 			path = iACC;
 			sourceTree = "<group>";

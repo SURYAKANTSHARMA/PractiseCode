@@ -53,10 +53,11 @@ class MainTabBarController: UITabBarController {
 	
 	private func makeFriendsList() -> ListViewController {
 		let vc = ListViewController()
+        let isPremium = User.shared?.isPremium == true
         vc.service = FriendAPIServiceItemsAdaptor(api: FriendsAPI.shared,
                                                                         isPremium: User.shared?.isPremium ?? false,
                                                                         select: { [weak vc] friend in vc?.showFriend(friend: friend)
-                                                                        }, cache: (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache)
+                                                                        }, cache: isPremium ? (UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate).cache : NullFriendsCache())
         vc.shouldRetry = true
         vc.maxRetryCount = 2
         vc.title = "Friends"
@@ -83,4 +84,10 @@ class MainTabBarController: UITabBarController {
 		return vc
 	}
 	
+}
+
+// Null Object pattern
+class NullFriendsCache: FriendsCache {
+    override func save(_ newFriends: [Friend]) {
+    }
 }

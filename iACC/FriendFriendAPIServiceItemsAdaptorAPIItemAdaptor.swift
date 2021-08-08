@@ -17,9 +17,7 @@ struct FriendAPIServiceItemsAdaptor: ItemService {
         api.loadFriends { result in
             DispatchQueue.mainAsyncIfNeeded {
                 completion(result.map { items in
-                    if isPremium == true {
-                        cache.save(items)
-                    }
+                    cache.save(items)
                     return items.map { item in
                         ItemViewModel(friend: item) {
                            select(item)
