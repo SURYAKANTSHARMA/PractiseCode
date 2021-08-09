@@ -15,9 +15,7 @@ class ListViewController: UITableViewController {
 	var retryCount = 0
 	var maxRetryCount = 0
 	var shouldRetry = false
-	
-	var longDateStyle = false
-	
+    
 	var fromReceivedTransfersScreen = false
 	var fromSentTransfersScreen = false
 	var fromCardsScreen = false
@@ -185,9 +183,7 @@ struct CardAPIServiceItemsAdaptor: ItemService {
 
 struct TransferAPIServiceItemsAdaptor: ItemService {
     let api: TransfersAPI
-    let longDateStyle: Bool
     let select: (Transfer) -> Void
-    let fromSentTransferScreen: Bool
     
     func loadItems(completion: @escaping
                     (Result<[ItemViewModel], Error>) -> Void) {
@@ -195,9 +191,31 @@ struct TransferAPIServiceItemsAdaptor: ItemService {
             DispatchQueue.mainAsyncIfNeeded {
                 completion(result.map { items in
                     items.filter {
-                        fromSentTransferScreen  ? $0.isSender : !$0.isSender
+                        $0.isSender
                     }
-                    .map { item in ItemViewModel(transfer: item, longDateStyle: longDateStyle) {
+                    .map { item in ItemViewModel(transfer: item, longDateStyle: true) {
+                        select(item)
+                     }
+                   }
+                })
+            }
+        }
+    }
+}
+
+struct SenderAPIServiceItemsAdaptor: ItemService {
+    let api: TransfersAPI
+    let select: (Transfer) -> Void
+    
+    func loadItems(completion: @escaping
+                    (Result<[ItemViewModel], Error>) -> Void) {
+        api.loadTransfers { result in
+            DispatchQueue.mainAsyncIfNeeded {
+                completion(result.map { items in
+                    items.filter {
+                        !$0.isSender
+                    }
+                    .map { item in ItemViewModel(transfer: item, longDateStyle: false) {
                         select(item)
                      }
                    }

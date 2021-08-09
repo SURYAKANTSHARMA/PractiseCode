@@ -73,10 +73,9 @@ class MainTabBarController: UITabBarController {
 		vc.fromSentTransfersScreen = true
         vc.shouldRetry = true
         vc.maxRetryCount = 1
-        vc.longDateStyle = true
-        vc.service = TransferAPIServiceItemsAdaptor(api: .shared, longDateStyle: true, select: { [weak vc] tranfer in
+        vc.service = TransferAPIServiceItemsAdaptor(api: .shared, select: { [weak vc] tranfer in
             vc?.showTransferVC(transfer: tranfer)
-        }, fromSentTransferScreen: true)
+        })
         
         vc.navigationItem.title = "Sent"
         vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Send", style: .done, target: vc, action: #selector(vc.sendMoney))
@@ -88,11 +87,10 @@ class MainTabBarController: UITabBarController {
 		let vc = ListViewController()
         vc.shouldRetry = true
         vc.maxRetryCount = 1
-        vc.longDateStyle = false
         
-        vc.service = TransferAPIServiceItemsAdaptor(api: .shared, longDateStyle: false, select: { [weak vc] tranfer in
+        vc.service = SenderAPIServiceItemsAdaptor(api: .shared, select: { [weak vc] tranfer in
             vc?.showTransferVC(transfer: tranfer)
-        }, fromSentTransferScreen: false)
+        })
         
 
         vc.navigationItem.title = "Received"
